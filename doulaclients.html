@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Doula Intake</title>
+    <link href='https://fonts.googleapis.com/css?family=Amatic+SC:400,700' rel='stylesheet' type='text/css'>
+    
+    <style>
+        label{
+            color: darkgray;
+            font-family: monospace;
+            font-size: 16px;
+            margin-right: 30px;
+        }        
+        h1{
+            color: purple;
+            font-family: 'Amatic SC', cursive;
+            font-size: 40px;
+        }
+        h2{
+            color: black;
+            font-family: sans-serif;
+            font-size: 30px;
+        }
+        button{
+            width: 60px;
+            height: 30px;
+        }       
+    </style>
+     
+</head>
+<body>
+     <div id = "bdintake">
+           <h1>Doula Intake</h1>
+           
+            <label>Client Name </label>
+            <input type="text" id="add-client" class="TXTBOX" placeholder="client name" />
+            <br />
+            <label>Spouse Name </label>
+            <input type ="text" id="add-spouse" class="TXTBOX" placeholder="spouse name"/>
+            <br />
+            <label>Client Phone </label>
+            <input type ="number" id="add-phone" class="TXTBOX" placeholder="phone number"/>
+            <br />
+            <label>Due Date </label>
+            <input type ="integer" id="due-date" class="TXTBOX" placeholder="due date"/>
+
+            <button onclick = "makeClient()" id="submitintake">submit</button>
+            <br />
+        </div>
+<!-- BIRTH PREF FORM-->
+        <div id = "bpreferences">
+            <h1>Client Preferences</h1>
+            <label>Birth Location </label>
+            <select id="blocation" class="TXTBOX" >  
+            <option value="text">home birth</option>
+            <option value="text">hospital birth</option>  
+            <option value="text">birth center</option>
+            </select>
+            <button onlcick = "makeClient()" id="submitpref">submit</button>
+            <br />
+        </div>
+<!-- QUESTION-->
+           <div id="bquestion">
+            <h1>Birthed?</h1>
+            <label>Have you birthed?</label>
+            <select id="bquestion" class="TXTBOX">  
+            <option value="text">yes</option>
+            <option value="text">no</option>  
+            </select>
+             <button onlcick = "makeClient()" id="submitquest">submit</button>
+            <br />
+            </div>
+<!-- BIRTH EVENT FORM-->   
+           <div id="bevent">  
+            <h1>Tell us about your birth</h1>       
+            <label>Hours of Labor</label>
+             <input type ="number" id="add-hours" class="TXTBOX" placeholder="hours of labor"/> 
+            <br />
+            <label>Number of Babies </label>
+            <input type ="number" id="add-baby" class="TXTBOX" placeholder="# of babies"/>
+            <br />
+            <label>Type of Birth </label>
+            <select id="be-type" class="TXTBOX">  
+            <option value="text">un-medicated</option>
+            <option value="text">medicated</option>  
+            <option value="text">c-section</option>
+            </select>
+             <br />
+            <label>Mood </label>
+            <select id="mood" class="TXTBOX">  
+            <option value="text">happy</option>
+            <option value="text">sad</option>  
+            </select>
+            <button onclick = "makeClient()" id="submitevent">submit</button>
+    </div> 
+  
+  <script>
+     
+     function Client(name, spouse, phone,edd){
+        this.name = name;
+        this.spouse = spouse;
+        this.edd = edd;
+        this.phone = phone;
+        }   
+    function ClientPreferences(homebirth, hospitalbirth, birthcenter){
+        this.homebirth = homebirth;           
+        this.hospitalbirth = hospitalbirth;
+        this.birthcenter = birthcenter;
+        }
+    function BirthAnswer(yes, no){
+        this.birthanswer = birthanswer;
+         if (birthanswer == yes){ 
+            alert("CONGRATULATIONS");
+            }  
+        }
+    function BirthEvent(birthhours, numbaby, typeofbirth, mood){
+        this.birthhours = birthhours;
+        this.numbaby = numbaby;
+            if(this.numbaby >= 12){       
+            alert("Bummer");
+            }
+            if (birthtime < 12){ 
+            alert("Awesome");
+            }   
+        this.typeofbirth = typeofbirth;
+        this.mood = mood;
+        }
+//Model      
+      function Model(){
+          this.client = [];
+          this.clientpreferences = [];
+          this.birthanswer = [];
+          this.birthevent = [];
+      }
+      
+//Controller
+//      function Controller(model){
+//          this.newClient = function();
+//          
+//      }
+      
+      
+//View
+//  function showClient(name, value){
+//      document.getElementById("bdintake").innerHTML = value;
+//createPerson, take values as variables and push into controller then up to the model
+      
+    
+  </script>
+   
+   
+   
+   
+    
+</body>
+</html>
