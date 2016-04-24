@@ -45,7 +45,7 @@
             <label>Due Date </label>
             <input type ="integer" id="due-date" class="TXTBOX" placeholder="due date"/>
 
-            <button onclick = "makeClient()" id="submitintake">submit</button>
+            <button onclick = "makeClient(c)" id="submitintake">submit</button>
             <br />
         </div>
 <!-- BIRTH PREF FORM-->
@@ -57,7 +57,7 @@
             <option value="text">hospital birth</option>  
             <option value="text">birth center</option>
             </select>
-            <button onlcick = "makeClient()" id="submitpref">submit</button>
+            <button onlcick = "makeClient(c)" id="submitpref">submit</button>
             <br />
         </div>
 <!-- QUESTION-->
@@ -68,7 +68,7 @@
             <option value="text">yes</option>
             <option value="text">no</option>  
             </select>
-             <button onlcick = "makeClient()" id="submitquest">submit</button>
+             <button onlcick = "makeClient(c)" id="submitquest">submit</button>
             <br />
             </div>
 <!-- BIRTH EVENT FORM-->   
@@ -92,11 +92,11 @@
             <option value="text">happy</option>
             <option value="text">sad</option>  
             </select>
-            <button onclick = "makeClient()" id="submitevent">submit</button>
+            <button onclick = "makeClient(c)" id="submitevent">submit</button>
     </div> 
   
   <script>
-     
+//Global 
      function Client(name, spouse, phone,edd){
         this.name = name;
         this.spouse = spouse;
@@ -135,17 +135,84 @@
       }
       
 //Controller
-//      function Controller(model){
-//          this.newClient = function();
-//          
-//      }
-      
-      
+      function Controller(model){ //1. get the info
+          this.getClientInfo = function(){ 
+                return model.client;
+          }
+          this.makeClient = function(name, spouse, phone,edd){ //2. make it for each array
+              model.client.push(new client(name, spouse, phone,edd));
+          }    
+        this.getClientPref = function(){ 
+                return model.clientpreferences;
+          }
+         this.makeClientPref = function(homebirth, hospitalbirth, birthcenter){
+              model.clientpreferences.push(new clientpreferences(homebirth, hospitalbirth, birthcenter));
+          }
+         this.getClientAnswer = function(){ 
+                return model.birthanswer;
+          }
+        this.makeClientAnswer = function(yes, no){
+            model.birthanswer.push(new birthanswer(yes, no));
+          }  
+         this.getClientBirthEvent = function(){ 
+                return model.birthevent;
+          }
+        this.makeClientBirthEvent = function(birthhours, numbaby, typeofbirth, mood){
+            model.birthevent.push(new birthevent(birthhours, numbaby, typeofbirth, mood));
+          }      
+      }
+           //showClient function was intended to be a function that worked for all arrays
 //View
-//  function showClient(name, value){
-//      document.getElementById("bdintake").innerHTML = value;
-//createPerson, take values as variables and push into controller then up to the model
+  function View (controller){
+      this.showClient = function(){   //show is the area in the innerHTML - like world
+      var show = document.getElementById("bdintake").innerHTML = "";
+          show.innerHTML=""; //HTML is empty
+          for (var i = 0; i < controller.client.length, i++){ //calling the new client array from the controller and looking in it.
+              return this.client(i); //returning client's array at indexes
+          }
+          }
+    this.showClientPref = function(){   
+      var show = document.getElementById("bpreferences").innerHTML = "";
+          this.show.innerHTML="";
+            for (var i = 0; i < controller.clientpreferences.length, i++){ 
+              return this.clientpreferences(i); 
+          }
+          }
+     this.showClientAnswer = function(){   
+      var show = document.getElementById("bquestion").innerHTML = "";
+          this.show.innerHTML="";
+          for (var i = 0; i < controller.birthanswer.length, i++){ 
+              return this.birthanswer(i); 
+          }
+      this.showClientBirthEvent = function(){   
+      var show = document.getElementById("bevent").innerHTML = "";
+          this.show.innerHTML="";
+          for (var i = 0; i < controller.birthevent.length, i++){ 
+              return this.birthevent(i);
+          }
+        }
+     }
       
+      var m = new Model();
+      var c = new Controller(m);
+      var v = new View (c);
+      
+  document.getElementById("bdintake").onclick = function(){
+       v.showClient();
+  }   
+  
+  document.getElementById("preferences").onclick = function(){
+       v.showClientPref();
+  }   
+    
+  document.getElementById("bquestion").onclick = function(){
+        v.showClientAnswer();
+  }   
+    
+  document.getElementById("bevent").onclick = function(){
+        v.showClientBirthEvent();
+  }   
+            
     
   </script>
    
